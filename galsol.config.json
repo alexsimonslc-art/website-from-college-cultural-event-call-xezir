@@ -1,9 +1,165 @@
 {
-  "name": "Website from college cultural event called Combat",
-  "slug": "website-from-college-cultural-event-call-xezir",
-  "template": "blank",
-  "pages": [
-    "index"
-  ],
-  "version": 1
+  "generator": "ui-library",
+  "version": 1,
+  "style": "glass",
+  "palette": "sunset-fest",
+  "fonts": "syne+inter",
+  "spec": {
+    "style": "glass",
+    "palette": "sunset-fest",
+    "fonts": "syne+inter",
+    "event": {
+      "name": "Combat 2026"
+    },
+    "pages": [
+      {
+        "name": "index",
+        "title": "Home",
+        "sections": [
+          {
+            "type": "hero",
+            "content": {
+              "badge": "The Ultimate Intercollegiate Cultural Showdown",
+              "headline": "UNLEASH THE CHAOS, CLAIM THE THRONE",
+              "sub": "Where art, rhythm, and intellect collide across 12+ epic events. Win glory, cash prizes, and ultimate bragging rights.",
+              "ctaText": "Register for Combat",
+              "ctaHref": "pages/register.html",
+              "image": "https://images.pexels.com/photos/37882408/pexels-photo-37882408.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+            },
+            "effects": {
+              "background": "data-lightfall",
+              "text": "txt-gradient",
+              "button": "btn-shine"
+            }
+          },
+          {
+            "type": "countdown",
+            "content": {
+              "title": "The Arena Opens In",
+              "date": "2026-03-14T09:00:00"
+            }
+          },
+          {
+            "type": "about",
+            "content": {
+              "title": "Welcome to the Arena",
+              "body": "Combat is the premier annual cultural festival designed to push your creative and intellectual boundaries to the absolute limit. From the high-octane synchrony of Western and Group Dance to the high-pressure hot seats of the Stress Interview, we host a battlefield for every talent. Whether you are an artist, a debater, a photographer, or a corporate maven, your stage is waiting."
+            }
+          },
+          {
+            "type": "schedule",
+            "content": {
+              "title": "The Battle Plan",
+              "items": [
+                {
+                  "time": "09:00 AM - 11:30 AM",
+                  "title": "Western & Group Dance Face-off",
+                  "desc": "High-energy choreography, explosive crew routines, and ultimate rhythmic synchronization on the main stage."
+                },
+                {
+                  "time": "11:30 AM - 01:00 PM",
+                  "title": "Light Music & Solo Vocals",
+                  "desc": "Acoustic performances and soulful melodies competing in the open-air theater."
+                },
+                {
+                  "time": "01:00 PM - 02:30 PM",
+                  "title": "The Creative Suite (Drawing, Photography, Poster)",
+                  "desc": "Live theme reveal for shutterbugs and painters to turn blank slates into masterpieces."
+                },
+                {
+                  "time": "02:30 PM - 04:00 PM",
+                  "title": "The Brain Grid (Quiz & Debate)",
+                  "desc": "Sharp arguments, critical thinking, and rapid-fire trivia under the spotlight."
+                },
+                {
+                  "time": "04:00 PM - 05:30 PM",
+                  "title": "Corporate Walk & Stress Interview",
+                  "desc": "Walk the ramp with unmatched poise, then face our panel of brutal HR interrogators."
+                },
+                {
+                  "time": "05:30 PM - 07:00 PM",
+                  "title": "The Ultimate Treasure Hunt",
+                  "desc": "A chaotic campus-wide run to decode cryptic clues and find the grand bounty."
+                }
+              ]
+            }
+          },
+          {
+            "type": "speakers",
+            "content": {
+              "title": "Meet the Grand Jury",
+              "items": [
+                {
+                  "name": "Vikram Rathore",
+                  "role": "Choreographer & Western Dance Lead Judge",
+                  "photo": "https://upload.wikimedia.org/wikipedia/commons/4/41/Vikram_Rathour_%2801%29.jpg"
+                },
+                {
+                  "name": "Ananya Sen",
+                  "role": "Vocalist & Light Music Jury Chairperson",
+                  "photo": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100063936704645"
+                },
+                {
+                  "name": "Rohan Verma",
+                  "role": "Visual Artist & Poster Making Critic",
+                  "photo": "https://lookaside.fbsbx.com/lookaside/crawler/instagram/realrohanverma/profile_pic.jpg"
+                },
+                {
+                  "name": "Meera Nair",
+                  "role": "Chief HR Consultant & Stress Interview Panelist",
+                  "photo": "https://wp.blackstarprojects.org/wp-content/uploads/2022/09/Mira-Nair-Headshot.jpeg"
+                }
+              ]
+            }
+          },
+          {
+            "type": "gallery",
+            "content": {
+              "title": "Relive the Fire",
+              "images": [
+                "https://images.pexels.com/photos/37882407/pexels-photo-37882407.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+                "https://images.pexels.com/photos/36882728/pexels-photo-36882728.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+                "https://images.pexels.com/photos/12657546/pexels-photo-12657546.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+                "https://images.pexels.com/photos/20993079/pexels-photo-20993079.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+                "https://images.pexels.com/photos/6398745/pexels-photo-6398745.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+                "https://images.pexels.com/photos/5193531/pexels-photo-5193531.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+              ]
+            }
+          },
+          {
+            "type": "cta",
+            "content": {
+              "title": "Will You Settle for Second Place?",
+              "sub": "Registration slots for group events and individual showdowns are highly limited. Sign up your college contingency now.",
+              "ctaText": "Secure Your Slot",
+              "ctaHref": "pages/register.html"
+            }
+          }
+        ]
+      },
+      {
+        "name": "register",
+        "title": "Register",
+        "sections": [
+          {
+            "type": "hero",
+            "content": {
+              "badge": "Combat 2026 Registration",
+              "headline": "ENTER THE BATTLEFIELD",
+              "sub": "Fill in your details, select your preferred challenges, and prepare for glory.",
+              "ctaText": "View Guidelines",
+              "ctaHref": "#form-section",
+              "image": "https://images.pexels.com/photos/5152571/pexels-photo-5152571.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+            }
+          },
+          {
+            "type": "form",
+            "content": {
+              "title": "Contingency & Individual Registration"
+            }
+          }
+        ]
+      }
+    ]
+  }
 }
