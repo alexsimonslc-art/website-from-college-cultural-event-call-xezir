@@ -604,45 +604,143 @@ body {
   pointer-events: none;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
+/* Responsive Styles with Premium Fixed Mobile/Tablet Slide-out Drawer */
+@media (max-width: 992px) {
   .nav {
     padding: 1rem 1.5rem;
   }
   
+  /* Redesigned Tablet & Mobile Navigation Menu Drawer */
   .nav-links {
-    display: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 360px;
+    height: 100vh;
+    background: rgba(11, 5, 18, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 2.5rem 3rem;
+    gap: 2rem;
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s var(--ease);
+    box-shadow: none;
+    display: flex; /* Always display flex but offscreen via right: -100% */
+  }
+  
+  .nav-links::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--grad);
+    opacity: 0.8;
   }
   
   .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    padding: 2rem;
-    gap: 1.5rem;
-    z-index: 99;
-    box-shadow: var(--shadow);
+    right: 0;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8), -5px 0 25px rgba(255, 106, 61, 0.15);
   }
   
+  .nav-links a {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 800;
+    width: 100%;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  
+  .nav-links a::after {
+    content: '→';
+    font-size: 1.2rem;
+    color: var(--accent);
+    opacity: 0.5;
+    transition: transform 0.3s;
+  }
+  
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    opacity: 1;
+    transform: translateX(5px);
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: #fff;
+    border-bottom-color: var(--accent);
+  }
+  
+  /* Premium Glowing Round Mobile Burger Trigger */
   .nav-burger {
     display: flex;
+    position: relative;
+    z-index: 1001; /* Keeps button above the menu panel drawer */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    outline: none;
+    padding: 0;
+  }
+  
+  .nav-burger:hover {
+    background: rgba(255, 106, 61, 0.08);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(255, 106, 61, 0.2);
+  }
+  
+  .nav-burger span {
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s, background 0.3s;
+  }
+  
+  /* Burger offsets */
+  .nav-burger span:nth-child(1) {
+    transform: translateY(-6px);
+  }
+  .nav-burger span:nth-child(2) {
+    opacity: 1;
+  }
+  .nav-burger span:nth-child(3) {
+    transform: translateY(6px);
+  }
+  
+  /* Interactive Morph to Close Cross */
+  .nav-burger.open {
+    background: rgba(192, 38, 211, 0.12);
+    border-color: var(--accent-alt);
+    box-shadow: 0 0 15px rgba(192, 38, 211, 0.3);
   }
   
   .nav-burger.open span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: rotate(45deg);
   }
-  
   .nav-burger.open span:nth-child(2) {
     opacity: 0;
+    transform: scale(0);
   }
-  
   .nav-burger.open span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: rotate(-45deg);
   }
   
   .sched-item {
@@ -664,5 +762,13 @@ body {
   .footer-links {
     flex-direction: column;
     gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    width: 100%;
+    max-width: 100%;
+    border-left: none;
   }
 }

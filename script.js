@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const setIndicator = (el) => {
-      if (el && window.innerWidth > 768) {
+      if (el && window.innerWidth > 992) {
         const rect = el.getBoundingClientRect();
         const navRect = spotlightNav.getBoundingClientRect();
         ind.style.left = (rect.left - navRect.left) + 'px';
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 992) {
         ind.style.opacity = '0';
       } else if (activeLink) {
         setIndicator(activeLink);
