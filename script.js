@@ -1,96 +1,54 @@
-// Combat 2026 Interactive Suite & Navigation
 document.addEventListener('DOMContentLoaded', () => {
-  // Navigation Mobile Burger Toggle
+  // Mobile Nav Dropdown Toggle
   const burger = document.querySelector('[data-burger]');
   const navLinks = document.querySelector('.nav-links');
-
+  
   if (burger && navLinks) {
     burger.addEventListener('click', (e) => {
       e.stopPropagation();
-      burger.classList.toggle('open');
-      navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!navLinks.contains(e.target) && !burger.contains(e.target)) {
+      const isOpen = burger.classList.contains('open');
+      if (isOpen) {
         burger.classList.remove('open');
         navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+      } else {
+        burger.classList.add('open');
+        navLinks.classList.add('active');
+        document.body.style.overflow = 'hidden'; // prevent scrolling when full menu open
       }
     });
 
-    // Close menu when selecting a navigation link
+    // Close when clicking a link
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('open');
         navLinks.classList.remove('active');
+        document.body.style.overflow = '';
       });
     });
-  }
 
-  // Spotlight navigation effect and active link indicator
-  const spotlightNav = document.querySelector('[data-nav-spotlight]');
-  if (spotlightNav) {
-    // Underline Indicator creation
-    const links = spotlightNav.querySelectorAll('.nav-links a');
-    let indicator = spotlightNav.querySelector('.nav-ind');
-    if (!indicator && links.length > 0) {
-      indicator = document.createElement('div');
-      indicator.className = 'nav-ind';
-      spotlightNav.appendChild(indicator);
-    }
-
-    function updateIndicator(el) {
-      if (!indicator || !el) return;
-      const rect = el.getBoundingClientRect();
-      const navRect = spotlightNav.getBoundingClientRect();
-      indicator.style.width = `${rect.width}px`;
-      indicator.style.left = `${rect.left - navRect.left}px`;
-      indicator.style.opacity = '1';
-    }
-
-    const activeLink = spotlightNav.querySelector('.nav-links a.active');
-    if (activeLink) {
-      setTimeout(() => updateIndicator(activeLink), 150);
-    }
-
-    links.forEach(link => {
-      link.addEventListener('mouseenter', () => updateIndicator(link));
-    });
-
-    spotlightNav.addEventListener('mouseleave', () => {
-      const currentActive = spotlightNav.querySelector('.nav-links a.active');
-      if (currentActive) {
-        updateIndicator(currentActive);
-      } else if (indicator) {
-        indicator.style.opacity = '0';
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !burger.contains(e.target)) {
+        burger.classList.remove('open');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
       }
     });
-
-    // Cursor spotlight glow position update
-    spotlightNav.addEventListener('mousemove', (e) => {
-      const rect = spotlightNav.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      spotlightNav.style.setProperty('--nspx', `${x}px`);
-    });
-
-    window.addEventListener('resize', () => {
-      const currentActive = spotlightNav.querySelector('.nav-links a.active');
-      if (currentActive) updateIndicator(currentActive);
-    });
   }
 
-  // Countdown clock module
+  // Countdown Clock Timer
   const countdownEl = document.querySelector('[data-countdown]');
   if (countdownEl) {
-    const targetDate = new Date(countdownEl.dataset.countdown).getTime();
-    
-    function updateCountdown() {
+    const targetDateStr = countdownEl.getAttribute('data-countdown');
+    const targetDate = new Date(targetDateStr).getTime();
+
+    const updateTimer = () => {
       const now = new Date().getTime();
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.innerHTML = '<div class="cd-unit" style="width:100%"><span style="font-size:1.8rem">THE COMBAT HAS BEGUN!</span></div>';
+        countdownEl.innerHTML = '<div class="cd-unit" style="min-width: 100%"><span style="font-size:2rem;color:var(--accent)">THE ARENA IS OPEN!</span></div>';
         return;
       }
 
@@ -108,84 +66,169 @@ document.addEventListener('DOMContentLoaded', () => {
       if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
       if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
       if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
-    }
+    };
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    updateTimer();
+    setInterval(updateTimer, 1000);
   }
 
-  // Starfield & shooting stars canvas backdrop
-  const starsContainer = document.querySelector('[data-stars]');
-  if (starsContainer) {
-    const canvas = document.createElement('canvas');
-    canvas.style.position = 'absolute';
-    canvas.style.inset = '0';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '1';
-    starsContainer.appendChild(canvas);
+  // Header Nav Hover Spotlight & Underline indicator
+  const spotlightNav = document.querySelector('[data-nav-spotlight]');
+  if (spotlightNav) {
+    const links = spotlightNav.querySelectorAll('.nav-links a');
+    const activeLink = spotlightNav.querySelector('.nav-links a.active');
+    
+    // Create and append the dynamic underline indicator if it doesn't exist
+    let ind = spotlightNav.querySelector('.nav-ind');
+    if (!ind) {
+      ind = document.createElement('div');
+      ind.className = 'nav-ind';
+      spotlightNav.appendChild(ind);
+    }
 
-    const ctx = canvas.getContext('2d');
-    let width = canvas.width = starsContainer.offsetWidth;
-    let height = canvas.height = starsContainer.offsetHeight;
+    const setIndicator = (el) => {
+      if (el && window.innerWidth > 768) {
+        const rect = el.getBoundingClientRect();
+        const navRect = spotlightNav.getBoundingClientRect();
+        ind.style.left = (rect.left - navRect.left) + 'px';
+        ind.style.width = rect.width + 'px';
+        ind.style.opacity = '1';
+      } else {
+        ind.style.opacity = '0';
+      }
+    };
 
-    window.addEventListener('resize', () => {
-      width = canvas.width = starsContainer.offsetWidth;
-      height = canvas.height = starsContainer.offsetHeight;
+    // Initial position
+    if (activeLink) {
+      setTimeout(() => setIndicator(activeLink), 150);
+    }
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => setIndicator(link));
     });
 
-    const stars = Array.from({ length: 65 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      size: Math.random() * 1.5,
-      alpha: Math.random(),
-      speed: 0.01 + Math.random() * 0.015
-    }));
+    spotlightNav.addEventListener('mouseleave', () => {
+      if (activeLink) {
+        setIndicator(activeLink);
+      } else {
+        ind.style.opacity = '0';
+      }
+    });
 
+    // Spotlight cursor follow light effect
+    spotlightNav.addEventListener('mousemove', (e) => {
+      const rect = spotlightNav.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      spotlightNav.style.setProperty('--nspx', `${x}px`);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768) {
+        ind.style.opacity = '0';
+      } else if (activeLink) {
+        setIndicator(activeLink);
+      }
+    });
+  }
+
+  // Starry Canvas Dynamic Background Effect (Optimized)
+  const starContainers = document.querySelectorAll('[data-stars]');
+  starContainers.forEach(container => {
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'absolute';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '1';
+    container.style.position = 'relative';
+    container.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = container.offsetWidth;
+    let height = canvas.height = container.offsetHeight;
+
+    // Create stars
+    const stars = [];
+    const count = Math.min(Math.floor((width * height) / 9000), 100);
+
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 1.5 + 0.5,
+        d: Math.random() * 360,
+        speed: Math.random() * 0.05 + 0.02,
+        twinkle: Math.random() * 0.5 + 0.5
+      });
+    }
+
+    // Meteors
     const meteors = [];
+    const isMeteorEnabled = container.classList.contains('fx-meteors');
 
-    function draw() {
+    const draw = () => {
       ctx.clearRect(0, 0, width, height);
       
-      // Render starry night
-      stars.forEach(star => {
-        star.alpha += star.speed;
-        if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, Math.min(1, star.alpha))})`;
+      // Draw stars
+      stars.forEach(s => {
+        s.twinkle += s.speed;
+        const opacity = Math.abs(Math.sin(s.twinkle));
+        ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.8})`;
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // Spawn meteors dynamically
-      if (Math.random() < 0.01 && meteors.length < 3) {
-        meteors.push({
-          x: Math.random() * width,
-          y: -20,
-          len: 30 + Math.random() * 40,
-          speed: 6 + Math.random() * 6,
-          angle: Math.PI / 4 + (Math.random() - 0.5) * 0.1
+      // Draw and update meteors
+      if (isMeteorEnabled) {
+        if (Math.random() < 0.015 && meteors.length < 3) {
+          meteors.push({
+            x: Math.random() * width * 1.2 - width * 0.2,
+            y: 0,
+            len: Math.random() * 80 + 40,
+            speed: Math.random() * 4 + 4,
+            angle: Math.PI / 4, // 45 degrees fall
+            opacity: 1
+          });
+        }
+
+        meteors.forEach((m, idx) => {
+          m.x += Math.cos(m.angle) * m.speed;
+          m.y += Math.sin(m.angle) * m.speed;
+          m.opacity -= 0.015;
+
+          if (m.opacity <= 0 || m.x > width || m.y > height) {
+            meteors.splice(idx, 1);
+            return;
+          }
+
+          const grad = ctx.createLinearGradient(
+            m.x, m.y, 
+            m.x - Math.cos(m.angle) * m.len, m.y - Math.sin(m.angle) * m.len
+          );
+          grad.addColorStop(0, `rgba(255, 106, 61, ${m.opacity})`);
+          grad.addColorStop(0.3, `rgba(192, 38, 211, ${m.opacity * 0.5})`);
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(m.x, m.y);
+          ctx.lineTo(m.x - Math.cos(m.angle) * m.len, m.y - Math.sin(m.angle) * m.len);
+          ctx.stroke();
         });
       }
 
-      // Draw and clean meteors
-      meteors.forEach((m, idx) => {
-        m.x += Math.cos(m.angle) * m.speed;
-        m.y += Math.sin(m.angle) * m.speed;
-
-        ctx.strokeStyle = 'rgba(255, 106, 61, 0.35)';
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.moveTo(m.x, m.y);
-        ctx.lineTo(m.x - Math.cos(m.angle) * m.len, m.y - Math.sin(m.angle) * m.len);
-        ctx.stroke();
-
-        if (m.y > height + 100 || m.x < -100 || m.x > width + 100) {
-          meteors.splice(idx, 1);
-        }
-      });
-
       requestAnimationFrame(draw);
-    }
+    };
+
     draw();
-  }
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = container.offsetWidth;
+      height = canvas.height = container.offsetHeight;
+    });
+  });
 });
