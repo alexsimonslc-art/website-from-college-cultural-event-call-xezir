@@ -24,21 +24,28 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="nav" data-nav>
+<header class="nav" data-nav data-nav-spotlight>
   <a class="nav-brand" href="index.html">Combat 2026</a>
-  <nav class="nav-links"><a href="index.html">Home</a><a href="pages/register.html">Register</a></nav>
+  <nav class="nav-links"><a href="index.html" class="active">Home</a><a href="pages/register.html">Register</a></nav>
   <button class="nav-burger" aria-label="Menu" data-burger><span></span><span></span><span></span></button>
 </header>
 <main>
-<section class="hero" data-hero>
-  <div class="hero-bg" data-bg style="background-image:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.65)),url('https://images.pexels.com/photos/37882408/pexels-photo-37882408.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200');background-size:cover;background-position:center"></div>
+<section class="hero fx-meteors" data-hero data-stars>
+  <div class="hero-bg" data-bg style="background-image:linear-gradient(180deg,rgba(18,6,17,.5),rgba(18,6,17,.95)),url('https://images.pexels.com/photos/37882408/pexels-photo-37882408.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200');background-size:cover;background-position:center"></div>
   <div class="hero-inner">
     <span class="hero-badge reveal">The Ultimate Intercollegiate Cultural Showdown</span>
-    <h1 class="hero-title reveal">UNLEASH THE CHAOS, CLAIM THE THRONE</h1>
+    <h1 class="hero-title reveal txt-shiny">UNLEASH THE CHAOS, CLAIM THE THRONE</h1>
     <p class="hero-sub reveal">Where art, rhythm, and intellect collide across 12+ epic events. Win glory, cash prizes, and ultimate bragging rights.</p>
-    <a class="btn btn-lg reveal" href="pages/register.html">Register for Combat</a>
+    <a class="btn btn-lg btn-shine reveal" href="pages/register.html">Register for Combat</a>
   </div>
 </section>
+
+<div class="marquee" style="background:var(--bg2);padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="marquee-track" style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--accent);letter-spacing:0.05em;text-transform:uppercase">
+    <span>★ WESTERN DANCE ★ LIGHT MUSIC ★ GROUP DANCE ★ DRAWING ★ PHOTOGRAPHY ★ POSTER MAKING ★ DEBATE ★ QUIZ ★ CORPORATE WALK ★ STRESS INTERVIEW ★ TREASURE HUNT ★</span>
+    <span>★ WESTERN DANCE ★ LIGHT MUSIC ★ GROUP DANCE ★ DRAWING ★ PHOTOGRAPHY ★ POSTER MAKING ★ DEBATE ★ QUIZ ★ CORPORATE WALK ★ STRESS INTERVIEW ★ TREASURE HUNT ★</span>
+  </div>
+</div>
 <section class="section countdown-section" id="countdown">
   <div class="section-inner">
     <h2 class="section-title reveal">The Arena Opens In</h2>
@@ -60,27 +67,27 @@
   <div class="section-inner">
     <h2 class="section-title reveal">The Battle Plan</h2>
     <div class="schedule">
-    <div class="sched-item reveal">
+    <div class="sched-item reveal" data-glow>
       <div class="sched-time">09:00 AM - 11:30 AM</div>
       <div class="sched-body"><div class="sched-title">Western &amp; Group Dance Face-off</div><div class="sched-desc">High-energy choreography, explosive crew routines, and ultimate rhythmic synchronization on the main stage.</div></div>
     </div>
-    <div class="sched-item reveal">
+    <div class="sched-item reveal" data-glow>
       <div class="sched-time">11:30 AM - 01:00 PM</div>
       <div class="sched-body"><div class="sched-title">Light Music &amp; Solo Vocals</div><div class="sched-desc">Acoustic performances and soulful melodies competing in the open-air theater.</div></div>
     </div>
-    <div class="sched-item reveal">
+    <div class="sched-item reveal" data-glow>
       <div class="sched-time">01:00 PM - 02:30 PM</div>
       <div class="sched-body"><div class="sched-title">The Creative Suite (Drawing, Photography, Poster)</div><div class="sched-desc">Live theme reveal for shutterbugs and painters to turn blank slates into masterpieces.</div></div>
     </div>
-    <div class="sched-item reveal">
+    <div class="sched-item reveal" data-glow>
       <div class="sched-time">02:30 PM - 04:00 PM</div>
       <div class="sched-body"><div class="sched-title">The Brain Grid (Quiz &amp; Debate)</div><div class="sched-desc">Sharp arguments, critical thinking, and rapid-fire trivia under the spotlight.</div></div>
     </div>
-    <div class="sched-item reveal">
+    <div class="sched-item reveal" data-glow>
       <div class="sched-time">04:00 PM - 05:30 PM</div>
       <div class="sched-body"><div class="sched-title">Corporate Walk &amp; Stress Interview</div><div class="sched-desc">Walk the ramp with unmatched poise, then face our panel of brutal HR interrogators.</div></div>
     </div>
-    <div class="sched-item reveal">
+    <div class="sched-item reveal" data-glow>
       <div class="sched-time">05:30 PM - 07:00 PM</div>
       <div class="sched-body"><div class="sched-title">The Ultimate Treasure Hunt</div><div class="sched-desc">A chaotic campus-wide run to decode cryptic clues and find the grand bounty.</div></div>
     </div></div>
@@ -90,22 +97,22 @@
   <div class="section-inner">
     <h2 class="section-title reveal">Meet the Grand Jury</h2>
     <div class="grid grid-cards">
-    <article class="card speaker reveal">
+    <article class="card speaker reveal" data-spotlight data-magnetic>
       <div class="speaker-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/4/41/Vikram_Rathour_%2801%29.jpg')"></div>
       <div class="speaker-name">Vikram Rathore</div>
       <div class="speaker-role">Choreographer &amp; Western Dance Lead Judge</div>
     </article>
-    <article class="card speaker reveal">
+    <article class="card speaker reveal" data-spotlight data-magnetic>
       <div class="speaker-photo" style="background-image:url('https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100063936704645')"></div>
       <div class="speaker-name">Ananya Sen</div>
       <div class="speaker-role">Vocalist &amp; Light Music Jury Chairperson</div>
     </article>
-    <article class="card speaker reveal">
+    <article class="card speaker reveal" data-spotlight data-magnetic>
       <div class="speaker-photo" style="background-image:url('https://lookaside.fbsbx.com/lookaside/crawler/instagram/realrohanverma/profile_pic.jpg')"></div>
       <div class="speaker-name">Rohan Verma</div>
       <div class="speaker-role">Visual Artist &amp; Poster Making Critic</div>
     </article>
-    <article class="card speaker reveal">
+    <article class="card speaker reveal" data-spotlight data-magnetic>
       <div class="speaker-photo" style="background-image:url('https://wp.blackstarprojects.org/wp-content/uploads/2022/09/Mira-Nair-Headshot.jpeg')"></div>
       <div class="speaker-name">Meera Nair</div>
       <div class="speaker-role">Chief HR Consultant &amp; Stress Interview Panelist</div>
@@ -119,10 +126,10 @@
   </div>
 </section>
 <section class="section cta" id="register">
-  <div class="section-inner cta-inner reveal">
-    <h2 class="cta-title">Will You Settle for Second Place?</h2>
+  <div class="section-inner cta-inner reveal" data-spotlight>
+    <h2 class="cta-title txt-shiny">Will You Settle for Second Place?</h2>
     <p class="cta-sub">Registration slots for group events and individual showdowns are highly limited. Sign up your college contingency now.</p>
-    <a class="btn btn-lg" href="pages/register.html">Secure Your Slot</a>
+    <a class="btn btn-lg btn-shine" href="pages/register.html">Secure Your Slot</a>
   </div>
 </section>
 </main>

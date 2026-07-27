@@ -24,27 +24,50 @@
 <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-<header class="nav" data-nav>
+<header class="nav" data-nav data-nav-spotlight>
   <a class="nav-brand" href="../index.html">Combat 2026</a>
-  <nav class="nav-links"><a href="../index.html">Home</a><a href="../pages/register.html">Register</a></nav>
+  <nav class="nav-links"><a href="../index.html">Home</a><a href="../pages/register.html" class="active">Register</a></nav>
   <button class="nav-burger" aria-label="Menu" data-burger><span></span><span></span><span></span></button>
 </header>
 <main>
-<section class="hero" data-hero>
-  <div class="hero-bg" data-bg style="background-image:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.65)),url('https://images.pexels.com/photos/5152571/pexels-photo-5152571.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200');background-size:cover;background-position:center"></div>
+<section class="hero fx-meteors" data-hero data-stars>
+  <div class="hero-bg" data-bg style="background-image:linear-gradient(180deg,rgba(18,6,17,.5),rgba(18,6,17,.95)),url('https://images.pexels.com/photos/5152571/pexels-photo-5152571.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200');background-size:cover;background-position:center"></div>
   <div class="hero-inner">
     <span class="hero-badge reveal">Combat 2026 Registration</span>
-    <h1 class="hero-title reveal">ENTER THE BATTLEFIELD</h1>
+    <h1 class="hero-title reveal txt-shiny">ENTER THE BATTLEFIELD</h1>
     <p class="hero-sub reveal">Fill in your details, select your preferred challenges, and prepare for glory.</p>
-    <a class="btn btn-lg reveal" href="#form-section">View Guidelines</a>
+    <a class="btn btn-lg btn-shine reveal" href="#guidelines">View Guidelines</a>
   </div>
 </section>
-<section class="section" id="register"><div class="section-inner reveal">
-      <h2 class="section-title">Contingency &amp; Individual Registration</h2>
-      <p class="section-lead">Connect a GS Form to this site to collect registrations.</p></div></section>
 
-<section class="galsol-form" style="max-width:720px;margin:48px auto;padding:0 20px">
-  <iframe src="https://galsol.in/gs-form-view?f=comconclave-2027-contact-ruxnx&embed=1" title="ComConclave 2027 Contact" data-gs-auto="1" allowtransparency="true" loading="lazy" style="display:block;width:100%;height:760px;border:0;background:transparent"></iframe>
+<section class="section" id="guidelines">
+  <div class="section-inner">
+    <h2 class="section-title reveal">Event Guidelines &amp; Rules</h2>
+    <p class="section-lead reveal" style="margin-bottom:40px">Please read the instructions carefully before submitting the registration form below.</p>
+    <div class="grid grid-cards">
+      <div class="card reveal" data-glow>
+        <h3 style="color:var(--accent);margin-bottom:8px">Dance &amp; Music</h3>
+        <p style="font-size:0.95rem;color:var(--muted);margin:0">Group dance limit is 8-15 members. Light music performance duration is strictly capped at 4 minutes. Bring your soundtracks on a USB drive.</p>
+      </div>
+      <div class="card reveal" data-glow>
+        <h3 style="color:var(--accent);margin-bottom:8px">Arts &amp; Media</h3>
+        <p style="font-size:0.95rem;color:var(--muted);margin:0">Drawing sheets will be provided; artists must bring their own mediums. Photographers get a 3-hour campus theme hunt. No post-processing allowed.</p>
+      </div>
+      <div class="card reveal" data-glow>
+        <h3 style="color:var(--accent);margin-bottom:8px">Intellect &amp; Corporate</h3>
+        <p style="font-size:0.95rem;color:var(--muted);margin:0">Debaters will receive topics 15 minutes prior. Stress Interview participants must carry a printed resume/CV. Professional attire mandatory.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="form-section">
+  <div class="section-inner reveal">
+    <h2 class="section-title">Official Combat Registration</h2>
+    <p class="section-lead" style="margin-bottom:32px">Register your college contingent or sign up for solo showdowns via the secure form below.</p>
+    
+    <iframe src="https://galsol.in/gs-form-view?f=sanskriti-2026-q22ij&embed=1" title="Registration form" data-gs-auto="1" allowtransparency="true" loading="lazy" style="display:block;width:100%;max-width:720px;margin:0 auto;height:760px;border:0;background:transparent"></iframe>
+  </div>
 </section>
 </main>
 <footer class="footer reveal">
