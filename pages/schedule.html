@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schedule — Combat 2026</title>
+<meta name="description" content="Combat 2026 — complete battle plan, schedule tracks, and timings.">
+<meta name="theme-color" content="#ff6a3d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ff6a3d%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c026d3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22url(%23g)%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2243%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EC%3C%2Ftext%3E%3C%2Fsvg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Combat 2026">
+<meta property="og:title" content="Schedule — Combat 2026">
+<meta property="og:description" content="Plan your battle. View complete event times, locations and jury information.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  /* Schedule Filters Styling */
+  .schedule-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.75rem 1.5rem;
+    border-radius: 99px;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    transition: all 0.3s var(--ease);
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--grad);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(255, 106, 61, 0.2);
+  }
+  .sched-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .sched-card {
+    display: flex;
+    gap: 2rem;
+    padding: 2.25rem;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.3s var(--ease);
+    align-items: center;
+  }
+  .sched-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 106, 61, 0.08);
+  }
+  .sched-meta {
+    min-width: 220px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    padding-right: 2rem;
+  }
+  .sched-meta .time {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .sched-meta .venue {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .sched-meta .venue svg {
+    flex-shrink: 0;
+  }
+  .sched-content {
+    flex-grow: 1;
+  }
+  .sched-tag {
+    display: inline-block;
+    background: rgba(192, 38, 211, 0.1);
+    border: 1px solid var(--accent-alt);
+    color: var(--accent-alt);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+  .sched-tag.arts {
+    background: rgba(255, 106, 61, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .sched-tag.brain {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--muted);
+    color: #fff;
+  }
+  .sched-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .sched-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  @media(max-width: 768px) {
+    .sched-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .sched-meta {
+      border-right: none;
+      padding-right: 0;
+      min-width: 100%;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="nav" style="z-index:2000" data-nav data-nav-spotlight>
+  <a class="nav-brand" href="../index.html">Combat 2026</a>
+  <nav class="nav-links"><a href="../index.html">Home</a><a href="../pages/schedule.html" class="active">Schedule</a><a href="../pages/register.html">Register</a><a href="../pages/contact.html">Contact</a></nav>
+  <button class="nav-burger" aria-label="Menu" data-burger><span></span><span></span><span></span></button>
+</header>
+<main>
+<section class="hero fx-meteors" data-hero data-stars>
+  <div class="hero-bg" data-bg style="background-image:linear-gradient(180deg,rgba(18,6,17,.6),rgba(18,6,17,.95)),url('https://images.pexels.com/photos/12657546/pexels-photo-12657546.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200');background-size:cover;background-position:center"></div>
+  <div class="hero-inner">
+    <span class="hero-badge reveal">THE BATTLE PLAN</span>
+    <h1 class="hero-title reveal txt-shiny">CHRONICLES OF COMBAT</h1>
+    <p class="hero-sub reveal">Maximize your victory chances. Check the timing blocks, track categories, and venue maps for each competition sector.</p>
+    <a class="btn btn-lg btn-shine reveal" href="#events-schedule">Explore Timeline</a>
+  </div>
+</section>
+
+<section class="section" id="events-schedule">
+  <div class="section-inner">
+    <h2 class="section-title reveal">Timeline of Events</h2>
+    <p class="section-lead reveal">Filter the battles by focus area to plan your competitive path.</p>
+
+    <!-- Interactive Filters -->
+    <div class="schedule-filters reveal">
+      <button class="filter-btn active" data-filter="all">All Arenas</button>
+      <button class="filter-btn" data-filter="dance-music">Dance &amp; Music</button>
+      <button class="filter-btn" data-filter="arts-media">Arts &amp; Media</button>
+      <button class="filter-btn" data-filter="intellect-corporate">Intellect &amp; Corporate</button>
+    </div>
+
+    <div class="sched-grid">
+      <!-- Item 1 -->
+      <div class="sched-card reveal" data-glow data-category="dance-music">
+        <div class="sched-meta">
+          <span class="time">09:00 AM - 11:30 AM</span>
+          <span class="venue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Main Campus Auditorium
+          </span>
+        </div>
+        <div class="sched-content">
+          <span class="sched-tag">Dance &amp; Music</span>
+          <h3 class="sched-title">Western &amp; Group Dance Face-off</h3>
+          <p class="sched-desc">High-energy choreography, explosive crew routines, and ultimate rhythmic synchronization. Bring your backing tracks on a USB drive and report 30 minutes prior.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="sched-card reveal" data-glow data-category="dance-music">
+        <div class="sched-meta">
+          <span class="time">11:30 AM - 01:00 PM</span>
+          <span class="venue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Open Air Theatre (OAT)
+          </span>
+        </div>
+        <div class="sched-content">
+          <span class="sched-tag">Dance &amp; Music</span>
+          <h3 class="sched-title">Light Music &amp; Solo Vocals</h3>
+          <p class="sched-desc">Acoustic solo performances and soulful vocal acts. Maximum performance duration is capped strictly at 4 minutes per participant.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="sched-card reveal" data-glow data-category="arts-media">
+        <div class="sched-meta">
+          <span class="time">01:00 PM - 02:30 PM</span>
+          <span class="venue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Visual Arts Gallery (Block B)
+          </span>
+        </div>
+        <div class="sched-content">
+          <span class="sched-tag arts">Arts &amp; Media</span>
+          <h3 class="sched-title">Drawing &amp; Poster Making</h3>
+          <p class="sched-desc">Live theme announcement. Standard drawing sheets will be provided; participants must supply their own coloring mediums, brushes, and sketching tools.</p>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="sched-card reveal" data-glow data-category="arts-media">
+        <div class="sched-meta">
+          <span class="time">01:00 PM - 04:00 PM</span>
+          <span class="venue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Campus-wide (Start Block C)
+          </span>
+        </div>
+        <div class="sched-content">
+          <span class="sched-tag arts">Arts &amp; Media</span>
+          <h3 class="sched-title">Spot Photography</h3>
+          <p class="sched-desc">Shutterbugs get 3 hours to capture stellar photos based on a surprise campus prompt. Raw submissions are mandatory—no post-editing or filter software allowed.</p>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="sched-card reveal" data-glow data-category="intellect-corporate">
+        <div class="sched-meta">
+          <span class="time">02:30 PM - 04:00 PM</span>
+          <span class="venue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Seminar Hall 2A
+          </span>
+        </div>
+        <div class="sched-content">
+          <span class="sched-tag brain">Intellect &amp; Corporate</span>
+          <h3 class="sched-title">The Brain Grid (Quiz &amp; Debate)</h3>
+          <p class="sched-desc">Rapid-fire trivia and structural debates on current geopolitical trends. Debate motions are revealed exactly 15 minutes prior to the podium clock.</p>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="sched-card reveal" data-glow data-category="intellect-corporate">
+        <div class="sched-meta">
+          <span class="time">04:00 PM - 05:30 PM</span>
+          <span class="venue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Main Auditorium Hall
+          </span>
+        </div>
+        <div class="sched-content">
+          <span class="sched-tag brain">Intellect &amp; Corporate</span>
+          <h3 class="sched-title">Corporate Walk &amp; Stress Interview</h3>
+          <p class="sched-desc">Demonstrate business style on the runway, then transition to the panel interrogation room. Bring 3 hard copies of your CV/Resume.</p>
+        </div>
+      </div>
+
+      <!-- Item 7 -->
+      <div class="sched-card reveal" data-glow data-category="intellect-corporate">
+        <div class="sched-meta">
+          <span class="time">05:30 PM - 07:00 PM</span>
+          <span class="venue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Full Campus Grounds
+          </span>
+        </div>
+        <div class="sched-content">
+          <span class="sched-tag brain">Intellect &amp; Corporate</span>
+          <h3 class="sched-title">The Ultimate Treasure Hunt</h3>
+          <p class="sched-desc">A fast-paced scavenger operation across 15 distinct campus coordinates. Decipher complex codes, solve cryptic puzzles, and find the grand prize before twilight falls.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta" id="register">
+  <div class="section-inner cta-inner reveal" data-spotlight>
+    <h2 class="cta-title txt-shiny">Prepared to Stake Your Claim?</h2>
+    <p class="cta-sub">Registration slots for all premium team tracks fill up rapidly. Don't wait until the last minute—lock in your college's schedule today.</p>
+    <a class="btn btn-lg btn-shine" href="../pages/register.html">Register for Combat</a>
+  </div>
+</section>
+</main>
+<footer class="footer reveal">
+  <div class="footer-inner">
+    <div class="footer-brand">Combat 2026</div>
+    <nav class="footer-links"><a href="../index.html">Home</a><a href="../pages/schedule.html">Schedule</a><a href="../pages/register.html">Register</a><a href="../pages/contact.html">Contact</a></nav>
+    <div class="footer-copy">© 2026 Combat 2026. Made with GalSol.</div>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  // Simple category filtering
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const schedCards = document.querySelectorAll('.sched-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Toggle active state
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      schedCards.forEach(card => {
+        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
