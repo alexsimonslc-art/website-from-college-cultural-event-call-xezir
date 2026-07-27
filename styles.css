@@ -60,7 +60,7 @@ body {
   padding: 1.25rem 2.5rem;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 2000;
   background: var(--glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -767,8 +767,10 @@ body {
     align-items: flex-start;
     padding: 6rem 2.5rem 3rem;
     gap: 2rem;
-    z-index: 1000;
-    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s var(--ease);
+    z-index: 2100;
+    visibility: hidden;
+    pointer-events: none;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s var(--ease);
     box-shadow: none;
     display: flex; /* Always display flex but offscreen via right: -100% */
   }
@@ -786,6 +788,8 @@ body {
   
   .nav-links.active {
     right: 0;
+    visibility: visible;
+    pointer-events: auto;
     box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8), -5px 0 25px rgba(255, 106, 61, 0.15);
   }
   
@@ -826,7 +830,7 @@ body {
   .nav-burger {
     display: flex;
     position: relative;
-    z-index: 1001; /* Keeps button above the menu panel drawer */
+    z-index: 2200; /* Keeps button above the menu panel drawer and nav */
     width: 44px;
     height: 44px;
     border-radius: 50%;
