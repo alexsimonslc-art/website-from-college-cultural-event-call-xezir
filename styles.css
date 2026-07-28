@@ -564,12 +564,10 @@ body {
 .contact-form-section {
   background: linear-gradient(180deg, 
     var(--bg) 0%, 
-    rgba(11, 5, 18, 0.6) 12%, 
-    #eae7f2 28%, 
-    #ffffff 45%, 
-    #ffffff 65%,
-    #faf9fc 80%, 
-    rgba(20, 11, 32, 0.6) 92%, 
+    #eae7f2 6%, 
+    #ffffff 12%, 
+    #ffffff 88%,
+    #eae7f2 94%, 
     var(--bg2) 100%
   );
   color: #0b0512;
@@ -581,13 +579,15 @@ body {
 }
 
 .contact-form-section .section-title {
-  background: linear-gradient(135deg, #0b0512 20%, var(--accent) 100%);
+  background: linear-gradient(135deg, #0b0512 30%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: #0b0512; /* Fallback for browsers that do not support text fill */
 }
 
 .contact-form-section .section-lead {
-  color: #4c3f5c;
+  color: #1a0933; /* Very dark deep purple/black for crisp legibility */
+  font-weight: 500;
 }
 
 /* Contact Page Specific Styles */
