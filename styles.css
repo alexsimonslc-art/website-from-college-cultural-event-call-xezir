@@ -560,13 +560,24 @@ body {
   margin-top: 1rem;
 }
 
-/* Contact Form Section with Smudged White Background */
+/* Contact Form Section with Smudged White Background and ultra-smooth dark-to-light gradient connections */
 .contact-form-section {
-  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #faf9fc 50%, #eae7f2 100%);
+  background: linear-gradient(180deg, 
+    var(--bg) 0%, 
+    rgba(11, 5, 18, 0.6) 12%, 
+    #eae7f2 28%, 
+    #ffffff 45%, 
+    #ffffff 65%,
+    #faf9fc 80%, 
+    rgba(20, 11, 32, 0.6) 92%, 
+    var(--bg2) 100%
+  );
   color: #0b0512;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  border-top: none;
+  border-bottom: none;
   position: relative;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 
 .contact-form-section .section-title {
