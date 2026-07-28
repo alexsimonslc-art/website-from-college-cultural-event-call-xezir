@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let width = canvas.width = container.offsetWidth;
     let height = canvas.height = container.offsetHeight;
 
-    // Create stars
+    // Create stars with depth layers
     const stars = [];
     const count = Math.min(Math.floor((width * height) / 9000), 100);
 
@@ -160,9 +160,26 @@ document.addEventListener('DOMContentLoaded', () => {
         r: Math.random() * 1.5 + 0.5,
         d: Math.random() * 360,
         speed: Math.random() * 0.05 + 0.02,
-        twinkle: Math.random() * 0.5 + 0.5
+        twinkle: Math.random() * 0.5 + 0.5,
+        depth: Math.random() * 35 + 10 // layered 3D depth factor
       });
     }
+
+    // Hover 3D coordinate tracking
+    let mouseX = 0, mouseY = 0;
+    let targetMouseX = 0, targetMouseY = 0;
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      // Calculate cursor deviation from center of container (from -0.5 to 0.5)
+      targetMouseX = ((e.clientX - rect.left) / width) - 0.5;
+      targetMouseY = ((e.clientY - rect.top) / height) - 0.5;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      targetMouseX = 0;
+      targetMouseY = 0;
+    });
 
     // Meteors
     const meteors = [];
@@ -171,13 +188,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
       
-      // Draw stars
+      // Smoothly ease mouse offsets
+      mouseX += (targetMouseX - mouseX) * 0.08;
+      mouseY += (targetMouseY - mouseY) * 0.08;
+      
+      // Draw stars with hovering 3D parallax offsets
       stars.forEach(s => {
         s.twinkle += s.speed;
         const opacity = Math.abs(Math.sin(s.twinkle));
+        
+        // Apply 3D parallax displacement relative to depth
+        const drawX = s.x + (mouseX * s.depth);
+        const drawY = s.y + (mouseY * s.depth);
+
         ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.8})`;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.arc(drawX, drawY, s.r, 0, Math.PI * 2);
         ctx.fill();
       });
 
